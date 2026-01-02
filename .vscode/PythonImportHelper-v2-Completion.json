@@ -1,0 +1,37 @@
+[
+    {
+        "label": "A",
+        "importPath": "src.main",
+        "description": "src.main",
+        "isExtraImport": true,
+        "detail": "src.main",
+        "documentation": {}
+    },
+    {
+        "label": "A",
+        "kind": 6,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "class A:\n    x = 1",
+        "detail": "src.main",
+        "documentation": {}
+    },
+    {
+        "label": "test_main",
+        "kind": 2,
+        "importPath": "tests.test_main",
+        "description": "tests.test_main",
+        "peekOfCode": "def test_main():\n    assert A.x == 1\ndef test_2():\n    assert 2 == 2",
+        "detail": "tests.test_main",
+        "documentation": {}
+    },
+    {
+        "label": "test_2",
+        "kind": 2,
+        "importPath": "tests.test_main",
+        "description": "tests.test_main",
+        "peekOfCode": "def test_2():\n    assert 2 == 2",
+        "detail": "tests.test_main",
+        "documentation": {}
+    }
+]
