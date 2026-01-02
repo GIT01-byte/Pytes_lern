@@ -1,14 +1,6 @@
 [
     {
         "label": "A",
-        "importPath": "src.main",
-        "description": "src.main",
-        "isExtraImport": true,
-        "detail": "src.main",
-        "documentation": {}
-    },
-    {
-        "label": "A",
         "kind": 6,
         "importPath": "src.main",
         "description": "src.main",
@@ -17,20 +9,20 @@
         "documentation": {}
     },
     {
-        "label": "test_main",
+        "label": "test_multiple",
         "kind": 2,
         "importPath": "tests.test_main",
         "description": "tests.test_main",
-        "peekOfCode": "def test_main():\n    assert A.x == 1\ndef test_2():\n    assert 2 == 2",
+        "peekOfCode": "def test_multiple():\n    x = 2\n    y = 1\n    assert x * y == 2\ndef test_division():\n    x = 2\n    y = 1\n    assert x / y == 2",
         "detail": "tests.test_main",
         "documentation": {}
     },
     {
-        "label": "test_2",
+        "label": "test_division",
         "kind": 2,
         "importPath": "tests.test_main",
         "description": "tests.test_main",
-        "peekOfCode": "def test_2():\n    assert 2 == 2",
+        "peekOfCode": "def test_division():\n    x = 2\n    y = 1\n    assert x / y == 2",
         "detail": "tests.test_main",
         "documentation": {}
     }

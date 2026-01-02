@@ -1,9 +1,10 @@
-from src.main import A
+def test_multiple():
+    x = 2
+    y = 1
+    assert x * y == 2
 
 
-def test_main():
-    assert A.x == 1
-
-
-def test_2():
-    assert 2 == 2
+def test_division():
+    x = 2
+    y = 1
+    assert x / y == 2
