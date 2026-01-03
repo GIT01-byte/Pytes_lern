@@ -1,29 +1,361 @@
 [
     {
-        "label": "A",
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "SettingsConfigDict",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "String",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "and_",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "select",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "async_sessionmaker",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "create_async_engine",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "DeclarativeBase",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "core.db",
+        "description": "core.db",
+        "isExtraImport": true,
+        "detail": "core.db",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "core.db",
+        "description": "core.db",
+        "isExtraImport": true,
+        "detail": "core.db",
+        "documentation": {}
+    },
+    {
+        "label": "async_engine",
+        "importPath": "core.db",
+        "description": "core.db",
+        "isExtraImport": true,
+        "detail": "core.db",
+        "documentation": {}
+    },
+    {
+        "label": "async_session_factory",
+        "importPath": "core.db",
+        "description": "core.db",
+        "isExtraImport": true,
+        "detail": "core.db",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Programm",
+        "importPath": "core.models",
+        "description": "core.models",
+        "isExtraImport": true,
+        "detail": "core.models",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammRead",
+        "importPath": "core.schemas",
+        "description": "core.schemas",
+        "isExtraImport": true,
+        "detail": "core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammAdd",
+        "importPath": "core.schemas",
+        "description": "core.schemas",
+        "isExtraImport": true,
+        "detail": "core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammAdd",
+        "importPath": "core.schemas",
+        "description": "core.schemas",
+        "isExtraImport": true,
+        "detail": "core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
         "kind": 6,
-        "importPath": "src.main",
-        "description": "src.main",
-        "peekOfCode": "class A:\n    x = 1",
-        "detail": "src.main",
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
         "documentation": {}
     },
     {
-        "label": "test_multiple",
-        "kind": 2,
-        "importPath": "tests.test_main",
-        "description": "tests.test_main",
-        "peekOfCode": "def test_multiple():\n    x = 2\n    y = 1\n    assert x * y == 2\ndef test_division():\n    x = 2\n    y = 1\n    assert x / y == 2",
-        "detail": "tests.test_main",
+        "label": "tracemalloc",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tracemalloc",
+        "description": "tracemalloc",
+        "detail": "tracemalloc",
         "documentation": {}
     },
     {
-        "label": "test_division",
-        "kind": 2,
-        "importPath": "tests.test_main",
-        "description": "tests.test_main",
-        "peekOfCode": "def test_division():\n    x = 2\n    y = 1\n    assert x / y == 2",
-        "detail": "tests.test_main",
+        "label": "ProgrammService",
+        "importPath": "programms.service",
+        "description": "programms.service",
+        "isExtraImport": true,
+        "detail": "programms.service",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammsRepo",
+        "importPath": "programms.repository",
+        "description": "programms.repository",
+        "isExtraImport": true,
+        "detail": "programms.repository",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "src.core.config",
+        "description": "src.core.config",
+        "peekOfCode": "class Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):\n        return f\"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}\"\n    @property",
+        "detail": "src.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "src.core.config",
+        "description": "src.core.config",
+        "peekOfCode": "BASE_DIR = Path(__file__).parent\nDOTENV_FILE_PATH = BASE_DIR.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):",
+        "detail": "src.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "DOTENV_FILE_PATH",
+        "kind": 5,
+        "importPath": "src.core.config",
+        "description": "src.core.config",
+        "peekOfCode": "DOTENV_FILE_PATH = BASE_DIR.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):\n        return f\"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}\"",
+        "detail": "src.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "kind": 5,
+        "importPath": "src.core.config",
+        "description": "src.core.config",
+        "peekOfCode": "settings = Settings() # pyright: ignore[reportCallIssue]",
+        "detail": "src.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "kind": 6,
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "peekOfCode": "class Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:\n                cols.append(f\"{col}={getattr(self, col)}\")\n        return f\"<{self.__class__.__name__} {', '.join(cols)}>\"",
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "async_engine",
+        "kind": 5,
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "peekOfCode": "async_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\n# session_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):",
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "async_session_factory",
+        "kind": 5,
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "peekOfCode": "async_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:\n                cols.append(f\"{col}={getattr(self, col)}\")",
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "Programm",
+        "kind": 6,
+        "importPath": "src.core.models",
+        "description": "src.core.models",
+        "peekOfCode": "class Programm(Base):\n    __tablename__ = 'programms'\n    id: Mapped[int] = mapped_column(primary_key=True)\n    title: Mapped[str] = mapped_column(String(200), unique=True, nullable=False)\n    author: Mapped[str] = mapped_column(String(100), nullable=False)\n    description: Mapped[Optional[str]] = mapped_column(nullable=True)",
+        "detail": "src.core.models",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammRead",
+        "kind": 6,
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
+        "peekOfCode": "class ProgrammRead(BaseModel):\n    id: int\n    title: str\n    author: str \n    description: str\n    model_config = {\n        \"from_attributes\": True\n    }\nclass ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)",
+        "detail": "src.core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammAdd",
+        "kind": 6,
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
+        "peekOfCode": "class ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)\n    title: str = Field(default='N/A')\n    author: str = Field(default='N/A')\n    description: Optional[str] = Field(default='N/A')",
+        "detail": "src.core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammsRepo",
+        "kind": 6,
+        "importPath": "src.programms.repository",
+        "description": "src.programms.repository",
+        "peekOfCode": "class ProgrammsRepo:\n    @staticmethod\n    async def create_tables():\n        async with async_engine.begin() as conn:\n            await conn.run_sync(Base.metadata.drop_all)\n            await conn.run_sync(Base.metadata.create_all)\n    @staticmethod\n    async def get_all_programms():\n        async with async_session_factory() as session:\n            query = select(Programm)",
+        "detail": "src.programms.repository",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammService",
+        "kind": 6,
+        "importPath": "src.programms.service",
+        "description": "src.programms.service",
+        "peekOfCode": "class ProgrammService:\n    @classmethod\n    async def get_all(cls):\n        programms = await ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    async def create_programm(\n        cls, \n        id: Optional[int], \n        title: str, ",
+        "detail": "src.programms.service",
         "documentation": {}
     }
 ]

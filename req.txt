@@ -1,1 +1,9 @@
 pytest
+
+pydantic
+pydantic-settings
+
+sqlalchemy
+psycopg
+asyncpg
+alembic
