@@ -1,4 +1,4 @@
-from sqlalchemy import and_, select
+from sqlalchemy import and_, func, select, delete
 
 from core.db import Base, async_engine, async_session_factory
 
@@ -36,4 +36,29 @@ class ProgrammsRepo:
             await session.commit()
             await session.refresh(new_programm)
             
+            print(f'Add programm: {new_programm.title}, ID: {new_programm.id}')
             return new_programm.id
+
+    @staticmethod
+    async def delete_all():
+        async with async_session_factory() as session:
+            query = select(Programm)
+            res = await session.execute(query)
+            items_to_delete = res.scalars().all()
+            
+            delete_count = 0
+            for item in items_to_delete:
+                await session.delete(item)
+                delete_count += 1
+            
+            print(f'Delete all programm rows, count deleted rows: {delete_count}')
+            await session.commit()
+
+    @staticmethod
+    async def count_of_programms():
+        async with async_session_factory() as session:
+            query = select(func.count()).select_from(Programm)
+            res = await session.execute(query)
+            count = res.scalar()
+            print(f'Count of all programms: {count}')
+            return count

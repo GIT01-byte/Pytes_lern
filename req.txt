@@ -1,4 +1,6 @@
 pytest
+anyio
+pytest-asyncio
 
 pydantic
 pydantic-settings

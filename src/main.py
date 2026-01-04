@@ -11,15 +11,16 @@ tracemalloc.start()
 async def main():
     await ProgrammsRepo.create_tables()
     
-    await ProgrammService.create_programm(
+    print(await ProgrammService.create_programm(
         id=2, 
         title='Git',
         author='Linus Torvalds', 
         description='Git is a distributed version control software system\
 that iscapable of managing versions of source code or data.\
 It is often used to control source code by programmers who are developing software collaboratively.'
-    )
-    await ProgrammService.get_all()
+    ))
+    print(await ProgrammService.get_all())
+    print(await ProgrammService.count())
 
 
 if __name__ == "__main__":
