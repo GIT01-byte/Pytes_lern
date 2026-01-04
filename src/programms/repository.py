@@ -40,6 +40,22 @@ class ProgrammsRepo:
             return new_programm.id
 
     @staticmethod
+    async def delete_programm(programm_id: int):
+        async with async_session_factory() as session:
+            # Выполнить запрос для выбора программы по id
+            query = select(Programm).where(Programm.id == programm_id)
+            result = await session.execute(query)
+            programm = result.scalar_one_or_none()
+            
+            if programm:
+                # Удалить найденную программу
+                await session.delete(programm)
+                await session.commit()  # Или flush(), если хотите отложить commit
+                print(f'Deleted programm with ID: {programm_id}')
+            else:
+                print(f'No programm found with ID: {programm_id}')
+
+    @staticmethod
     async def delete_all():
         async with async_session_factory() as session:
             query = select(Programm)

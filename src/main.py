@@ -1,6 +1,7 @@
 import asyncio
 import tracemalloc
 
+from core.schemas import ProgrammAdd
 from programms.service import ProgrammService
 from programms.repository import ProgrammsRepo
 
@@ -11,14 +12,21 @@ tracemalloc.start()
 async def main():
     await ProgrammsRepo.create_tables()
     
-    print(await ProgrammService.create_programm(
-        id=2, 
+    print(await ProgrammService.create_programm(ProgrammAdd(
+        id=1, 
         title='Git',
         author='Linus Torvalds', 
         description='Git is a distributed version control software system\
 that iscapable of managing versions of source code or data.\
 It is often used to control source code by programmers who are developing software collaboratively.'
-    ))
+        ))
+    )
+    print(await ProgrammService.create_programm(ProgrammAdd(
+        id=2, 
+        title='Git1',
+        author='Linus Torvalds Second',
+        ))
+    )
     print(await ProgrammService.get_all())
     print(await ProgrammService.count())
 

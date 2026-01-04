@@ -176,6 +176,14 @@
         "documentation": {}
     },
     {
+        "label": "async_engine",
+        "importPath": "core.db",
+        "description": "core.db",
+        "isExtraImport": true,
+        "detail": "core.db",
+        "documentation": {}
+    },
+    {
         "label": "BaseModel",
         "importPath": "pydantic",
         "description": "pydantic",
@@ -225,6 +233,14 @@
     },
     {
         "label": "ProgrammRead",
+        "importPath": "core.schemas",
+        "description": "core.schemas",
+        "isExtraImport": true,
+        "detail": "core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammAdd",
         "importPath": "core.schemas",
         "description": "core.schemas",
         "isExtraImport": true,
@@ -283,11 +299,11 @@
         "documentation": {}
     },
     {
-        "label": "ProgrammsRepo",
-        "importPath": "src.programms.repository",
-        "description": "src.programms.repository",
+        "label": "ProgrammAdd",
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
         "isExtraImport": true,
-        "detail": "src.programms.repository",
+        "detail": "src.core.schemas",
         "documentation": {}
     },
     {
@@ -367,7 +383,7 @@
         "kind": 6,
         "importPath": "src.core.schemas",
         "description": "src.core.schemas",
-        "peekOfCode": "class ProgrammRead(BaseModel):\n    id: int\n    title: str\n    author: str \n    description: str\n    model_config = {\n        \"from_attributes\": True\n    }\nclass ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)",
+        "peekOfCode": "class ProgrammRead(BaseModel):\n    id: Optional[int]\n    title: str\n    author: str \n    description: Optional[str]\n    model_config = {\n        \"from_attributes\": True\n    }\nclass ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)",
         "detail": "src.core.schemas",
         "documentation": {}
     },
@@ -394,8 +410,17 @@
         "kind": 6,
         "importPath": "src.programms.service",
         "description": "src.programms.service",
-        "peekOfCode": "class ProgrammService:\n    @classmethod\n    async def get_all(cls):\n        programms = await ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    async def create_programm(\n        cls, \n        id: Optional[int], \n        title: str, ",
+        "peekOfCode": "class ProgrammService:\n    @classmethod\n    async def get_all(cls):\n        programms = await ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    async def count(cls):\n        count = await ProgrammsRepo.count_of_programms()\n        return count\n    @classmethod",
         "detail": "src.programms.service",
+        "documentation": {}
+    },
+    {
+        "label": "programms",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', description='...'),\n    ]\n@pytest.mark.asyncio\nasync def test_zero_count_programms():\n    await ProgrammService.clear()\n    assert await ProgrammService.count() == 0\n@pytest.mark.asyncio",
+        "detail": "tests.test_count",
         "documentation": {}
     }
 ]

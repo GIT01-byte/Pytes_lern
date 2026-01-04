@@ -3,10 +3,10 @@ from pydantic import BaseModel, Field
 
 
 class ProgrammRead(BaseModel):
-    id: int
+    id: Optional[int]
     title: str
     author: str 
-    description: str
+    description: Optional[str]
 
     model_config = {
         "from_attributes": True
