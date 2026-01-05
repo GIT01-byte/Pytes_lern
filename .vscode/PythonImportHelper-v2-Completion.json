@@ -339,6 +339,15 @@
         "documentation": {}
     },
     {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
         "label": "sync_engine",
         "importPath": "src.core.db",
         "description": "src.core.db",
@@ -529,7 +538,16 @@
         "kind": 6,
         "importPath": "tests.unit_tests.test_programms",
         "description": "tests.unit_tests.test_programms",
-        "peekOfCode": "class TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2\n    def test_count_before_delete_programm(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)",
+        "peekOfCode": "class TestProgramms:\n    @pytest.mark.skipif(\"config.getoption('--run-obvious-tests') == 'false'\")\n    def test_zero_count_programms(self):\n        print(\"Run obvious test (zero count programms)\")\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2\n    def test_count_before_delete_programm(self, add_programms):",
+        "detail": "tests.unit_tests.test_programms",
+        "documentation": {}
+    },
+    {
+        "label": "TestOther",
+        "kind": 6,
+        "importPath": "tests.unit_tests.test_programms",
+        "description": "tests.unit_tests.test_programms",
+        "peekOfCode": "class TestOther:\n    @pytest.mark.skipif(\"config.getoption('--run-slow') == 'false'\")\n    def test_slow(self):\n        time.sleep(3)\n    def test_browser(self, browser):\n        print(f\"\\nВыбранный браузер: {browser}\")",
         "detail": "tests.unit_tests.test_programms",
         "documentation": {}
     },
@@ -538,7 +556,25 @@
         "kind": 2,
         "importPath": "tests.conftest",
         "description": "tests.conftest",
-        "peekOfCode": "def setup_db():\n    print(f\"{settings.DB_NAME=}\")\n    assert settings.MODE == 'TEST'\n    Base.metadata.drop_all(sync_engine)\n    Base.metadata.create_all(sync_engine)",
+        "peekOfCode": "def setup_db():\n    print(f\"{settings.DB_NAME=}\")\n    assert settings.MODE == 'TEST'\n    Base.metadata.drop_all(sync_engine)\n    Base.metadata.create_all(sync_engine)\ndef pytest_addoption(parser):\n    # Регистрируем браузер\n    parser.addoption(\n        \"--browser\",\n        default='chrome',",
+        "detail": "tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "pytest_addoption",
+        "kind": 2,
+        "importPath": "tests.conftest",
+        "description": "tests.conftest",
+        "peekOfCode": "def pytest_addoption(parser):\n    # Регистрируем браузер\n    parser.addoption(\n        \"--browser\",\n        default='chrome',\n        choices=(\"chrome\", \"mozilla\"),\n        help=\"Выбор браузера: chrome или mozilla\"\n    )\n    # Регистрируем медленные тесты\n    parser.addoption(",
+        "detail": "tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "browser",
+        "kind": 2,
+        "importPath": "tests.conftest",
+        "description": "tests.conftest",
+        "peekOfCode": "def browser(request):\n    return request.config.getoption(\"--browser\")",
         "detail": "tests.conftest",
         "documentation": {}
     }

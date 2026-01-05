@@ -1,11 +1,15 @@
+import time
 import pytest
+
 from src.programms.service import ProgrammService
 from src.core.schemas import ProgrammAdd, ProgrammRead
 
 
 @pytest.mark.usefixtures("empty_programms")
 class TestProgramms:
+    @pytest.mark.skipif("config.getoption('--run-obvious-tests') == 'false'")
     def test_zero_count_programms(self):
+        print("Run obvious test (zero count programms)")
         assert ProgrammService.count() == 0
 
     def test_count_programms(self, add_programms):
@@ -59,3 +63,11 @@ class TestProgramms:
 
         with pytest.raises(NameError, match='No programm found with ID: 9999'):
             ProgrammService.get(9999)
+
+class TestOther:
+    @pytest.mark.skipif("config.getoption('--run-slow') == 'false'")
+    def test_slow(self):
+        time.sleep(3)
+
+    def test_browser(self, browser):
+        print(f"\nВыбранный браузер: {browser}")
