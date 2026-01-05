@@ -18,3 +18,4 @@ class ProgrammAdd(BaseModel):
     title: str = Field(default='N/A')
     author: str = Field(default='N/A')
     description: Optional[str] = Field(default='N/A')
+    license_key: int = Field(ge=10, le=10)

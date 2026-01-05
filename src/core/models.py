@@ -12,3 +12,4 @@ class Programm(Base):
     title: Mapped[str] = mapped_column(String(200), unique=True, nullable=False)
     author: Mapped[str] = mapped_column(String(100), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(nullable=True)
+    license_key: Mapped[int] = mapped_column(String(10), unique=True, nullable=False)

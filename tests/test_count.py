@@ -22,6 +22,15 @@ def test_count_programms(programms, empty_programms):
 
     assert ProgrammService.count() == 2
 
+def test_get_programms(programms, empty_programms):
+    for programm in programms:
+        ProgrammService.create_programm(programm)
+    
+    all_programms = ProgrammService.get_all()
+    
+    for added_programm in all_programms:
+        assert added_programm in programms
+
 def test_count_before_delete_programm(programms, empty_programms):
     for programm in programms:
         ProgrammService.create_programm(programm)
