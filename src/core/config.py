@@ -2,7 +2,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).parent
-DOTENV_FILE_PATH = BASE_DIR.parent / ".env"
+DOTENV_FILE_PATH = BASE_DIR.parent.parent / ".env"
 
 
 class Settings(BaseSettings):
@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
+    MODE: str
 
     @property
     def DATABASE_URL_asyncpg(self):

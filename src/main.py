@@ -7,7 +7,7 @@ from programms.repository import ProgrammsRepo
 
 
 def main():
-    ProgrammsRepo.create_tables()
+    ProgrammService.setup_db()
     
     print(ProgrammService.create_programm(ProgrammAdd(
         id=1, 

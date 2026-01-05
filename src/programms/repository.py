@@ -1,8 +1,8 @@
 from sqlalchemy import and_, func, select, delete
 
-from core.db import Base, sync_engine, session_factory
+from core.db import sync_engine, session_factory
 
-from core.models import Programm
+from core.models import Base, Programm
 from core.schemas import ProgrammRead, ProgrammAdd
 
 
@@ -23,6 +23,26 @@ class ProgrammsRepo:
             result_dto = [ProgrammRead.model_validate(row, from_attributes=True) for row in result_orm]
             print(f"{result_dto=}")
             return result_dto
+    
+    @staticmethod
+    def get_programm(programm_id: int):
+        with session_factory() as session:
+            query = select(Programm).where(Programm.id == programm_id)
+            res = session.execute(query)
+            result_orm = res.scalar_one_or_none()
+            print(f'{result_orm=}')
+
+            if result_orm:
+                result_dto = ProgrammRead(
+                    id=result_orm.id,
+                    title=result_orm.title,
+                    author=result_orm.author,
+                    description=result_orm.description,
+                )
+                print(f"{result_dto=}")
+                return result_dto
+            else:
+                raise NameError(f'No programm found with ID: {programm_id}')
 
     @staticmethod
     def add_programm(programm: ProgrammAdd):
@@ -52,7 +72,7 @@ class ProgrammsRepo:
                 session.commit()  # Или flush(), если хотите отложить commit
                 print(f'Deleted programm with ID: {programm_id}')
             else:
-                print(f'No programm found with ID: {programm_id}')
+                raise NameError(f'No programm found with ID: {programm_id}')
 
     @staticmethod
     def delete_all():

@@ -1,6 +1,7 @@
 pytest
 anyio
 pytest-asyncio
+pytest-dotenv
 
 pydantic
 pydantic-settings

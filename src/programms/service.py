@@ -7,8 +7,17 @@ from core.db import sync_engine
 
 class ProgrammService:
     @classmethod
+    def setup_db(cls):
+        ProgrammsRepo.create_tables()
+    
+    @classmethod
     def get_all(cls):
         programms = ProgrammsRepo.get_all_programms()
+        return programms
+
+    @classmethod
+    def get(cls, programm_id: int):
+        programms = ProgrammsRepo.get_programm(programm_id)
         return programms
     
     @classmethod

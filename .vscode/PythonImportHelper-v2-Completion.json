@@ -88,14 +88,6 @@
         "documentation": {}
     },
     {
-        "label": "DeclarativeBase",
-        "importPath": "sqlalchemy.orm",
-        "description": "sqlalchemy.orm",
-        "isExtraImport": true,
-        "detail": "sqlalchemy.orm",
-        "documentation": {}
-    },
-    {
         "label": "sessionmaker",
         "importPath": "sqlalchemy.orm",
         "description": "sqlalchemy.orm",
@@ -120,11 +112,11 @@
         "documentation": {}
     },
     {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "DeclarativeBase",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "sqlalchemy.orm",
         "documentation": {}
     },
     {
@@ -144,19 +136,27 @@
         "documentation": {}
     },
     {
-        "label": "Base",
-        "importPath": "core.db",
-        "description": "core.db",
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
         "isExtraImport": true,
-        "detail": "core.db",
+        "detail": "typing",
         "documentation": {}
     },
     {
-        "label": "Base",
-        "importPath": "core.db",
-        "description": "core.db",
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
         "isExtraImport": true,
-        "detail": "core.db",
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
         "documentation": {}
     },
     {
@@ -184,19 +184,11 @@
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "Base",
+        "importPath": "core.models",
+        "description": "core.models",
         "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "Field",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "core.models",
         "documentation": {}
     },
     {
@@ -307,6 +299,14 @@
         "documentation": {}
     },
     {
+        "label": "ProgrammService",
+        "importPath": "src.programms.service",
+        "description": "src.programms.service",
+        "isExtraImport": true,
+        "detail": "src.programms.service",
+        "documentation": {}
+    },
+    {
         "label": "ProgrammAdd",
         "importPath": "src.core.schemas",
         "description": "src.core.schemas",
@@ -323,11 +323,51 @@
         "documentation": {}
     },
     {
+        "label": "ProgrammAdd",
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
+        "isExtraImport": true,
+        "detail": "src.core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammRead",
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
+        "isExtraImport": true,
+        "detail": "src.core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "sync_engine",
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "isExtraImport": true,
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "src.core.models",
+        "description": "src.core.models",
+        "isExtraImport": true,
+        "detail": "src.core.models",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "src.core.config",
+        "description": "src.core.config",
+        "isExtraImport": true,
+        "detail": "src.core.config",
+        "documentation": {}
+    },
+    {
         "label": "Settings",
         "kind": 6,
         "importPath": "src.core.config",
         "description": "src.core.config",
-        "peekOfCode": "class Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):\n        return f\"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}\"\n    @property",
+        "peekOfCode": "class Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    MODE: str\n    @property\n    def DATABASE_URL_asyncpg(self):\n        return f\"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}\"",
         "detail": "src.core.config",
         "documentation": {}
     },
@@ -336,7 +376,7 @@
         "kind": 5,
         "importPath": "src.core.config",
         "description": "src.core.config",
-        "peekOfCode": "BASE_DIR = Path(__file__).parent\nDOTENV_FILE_PATH = BASE_DIR.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):",
+        "peekOfCode": "BASE_DIR = Path(__file__).parent\nDOTENV_FILE_PATH = BASE_DIR.parent.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    MODE: str\n    @property",
         "detail": "src.core.config",
         "documentation": {}
     },
@@ -345,7 +385,7 @@
         "kind": 5,
         "importPath": "src.core.config",
         "description": "src.core.config",
-        "peekOfCode": "DOTENV_FILE_PATH = BASE_DIR.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    @property\n    def DATABASE_URL_asyncpg(self):\n        return f\"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}\"",
+        "peekOfCode": "DOTENV_FILE_PATH = BASE_DIR.parent.parent / \".env\"\nclass Settings(BaseSettings):\n    DB_HOST: str\n    DB_PORT: int\n    DB_USER: str\n    DB_PASS: str\n    DB_NAME: str\n    MODE: str\n    @property\n    def DATABASE_URL_asyncpg(self):",
         "detail": "src.core.config",
         "documentation": {}
     },
@@ -356,15 +396,6 @@
         "description": "src.core.config",
         "peekOfCode": "settings = Settings() # pyright: ignore[reportCallIssue]",
         "detail": "src.core.config",
-        "documentation": {}
-    },
-    {
-        "label": "Base",
-        "kind": 6,
-        "importPath": "src.core.db",
-        "description": "src.core.db",
-        "peekOfCode": "class Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:\n                cols.append(f\"{col}={getattr(self, col)}\")\n        return f\"<{self.__class__.__name__} {', '.join(cols)}>\"",
-        "detail": "src.core.db",
         "documentation": {}
     },
     {
@@ -381,7 +412,7 @@
         "kind": 5,
         "importPath": "src.core.db",
         "description": "src.core.db",
-        "peekOfCode": "async_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\nsession_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):",
+        "peekOfCode": "async_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\nsession_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)",
         "detail": "src.core.db",
         "documentation": {}
     },
@@ -390,7 +421,7 @@
         "kind": 5,
         "importPath": "src.core.db",
         "description": "src.core.db",
-        "peekOfCode": "session_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:",
+        "peekOfCode": "session_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)",
         "detail": "src.core.db",
         "documentation": {}
     },
@@ -399,8 +430,17 @@
         "kind": 5,
         "importPath": "src.core.db",
         "description": "src.core.db",
-        "peekOfCode": "async_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:\n                cols.append(f\"{col}={getattr(self, col)}\")",
+        "peekOfCode": "async_session_factory = async_sessionmaker(async_engine)",
         "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "kind": 6,
+        "importPath": "src.core.models",
+        "description": "src.core.models",
+        "peekOfCode": "class Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:\n                cols.append(f\"{col}={getattr(self, col)}\")\n        return f\"<{self.__class__.__name__} {', '.join(cols)}>\"",
+        "detail": "src.core.models",
         "documentation": {}
     },
     {
@@ -444,7 +484,7 @@
         "kind": 6,
         "importPath": "src.programms.service",
         "description": "src.programms.service",
-        "peekOfCode": "class ProgrammService:\n    @classmethod\n    def get_all(cls):\n        programms = ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    def count(cls):\n        count = ProgrammsRepo.count_of_programms()\n        return count\n    @classmethod",
+        "peekOfCode": "class ProgrammService:\n    @classmethod\n    def setup_db(cls):\n        ProgrammsRepo.create_tables()\n    @classmethod\n    def get_all(cls):\n        programms = ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    def get(cls, programm_id: int):",
         "detail": "src.programms.service",
         "documentation": {}
     },
@@ -453,44 +493,53 @@
         "kind": 2,
         "importPath": "src.main",
         "description": "src.main",
-        "peekOfCode": "def main():\n    ProgrammsRepo.create_tables()\n    print(ProgrammService.create_programm(ProgrammAdd(\n        id=1, \n        title='Git',\n        author='Linus Torvalds', \n        description='Git is a distributed version control software system\\\nthat iscapable of managing versions of source code or data.\\\nIt is often used to control source code by programmers who are developing software collaboratively.',\n        license_key='11-12-12-1'",
+        "peekOfCode": "def main():\n    ProgrammService.setup_db()\n    print(ProgrammService.create_programm(ProgrammAdd(\n        id=1, \n        title='Git',\n        author='Linus Torvalds', \n        description='Git is a distributed version control software system\\\nthat iscapable of managing versions of source code or data.\\\nIt is often used to control source code by programmers who are developing software collaboratively.',\n        license_key='11-12-12-1'",
         "detail": "src.main",
-        "documentation": {}
-    },
-    {
-        "label": "TestProgramms",
-        "kind": 6,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "class TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2\n    def test_count_before_delete_programm(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "add_programms",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def add_programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...', license_key='11-12-12-1'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', license_key='11-12-12-2'),\n    ]\n@pytest.fixture\ndef read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "read_programms",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),\n    ]\n@pytest.fixture\ndef empty_programms():\n    ProgrammService.clear()\n@pytest.mark.usefixtures(\"empty_programms\")\nclass TestProgramms:",
-        "detail": "tests.test_count",
         "documentation": {}
     },
     {
         "label": "empty_programms",
         "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def empty_programms():\n    ProgrammService.clear()\n@pytest.mark.usefixtures(\"empty_programms\")\nclass TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2",
-        "detail": "tests.test_count",
+        "importPath": "tests.unit_tests.conftest",
+        "description": "tests.unit_tests.conftest",
+        "peekOfCode": "def empty_programms():\n    ProgrammService.clear()\n@pytest.fixture\ndef add_programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...', license_key='11-12-12-1'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', license_key='11-12-12-2'),\n    ]\n@pytest.fixture\ndef read_programms():",
+        "detail": "tests.unit_tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "add_programms",
+        "kind": 2,
+        "importPath": "tests.unit_tests.conftest",
+        "description": "tests.unit_tests.conftest",
+        "peekOfCode": "def add_programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...', license_key='11-12-12-1'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', license_key='11-12-12-2'),\n    ]\n@pytest.fixture\ndef read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),",
+        "detail": "tests.unit_tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "read_programms",
+        "kind": 2,
+        "importPath": "tests.unit_tests.conftest",
+        "description": "tests.unit_tests.conftest",
+        "peekOfCode": "def read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),\n    ]",
+        "detail": "tests.unit_tests.conftest",
+        "documentation": {}
+    },
+    {
+        "label": "TestProgramms",
+        "kind": 6,
+        "importPath": "tests.unit_tests.test_programms",
+        "description": "tests.unit_tests.test_programms",
+        "peekOfCode": "class TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2\n    def test_count_before_delete_programm(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)",
+        "detail": "tests.unit_tests.test_programms",
+        "documentation": {}
+    },
+    {
+        "label": "setup_db",
+        "kind": 2,
+        "importPath": "tests.conftest",
+        "description": "tests.conftest",
+        "peekOfCode": "def setup_db():\n    print(f\"{settings.DB_NAME=}\")\n    assert settings.MODE == 'TEST'\n    Base.metadata.drop_all(sync_engine)\n    Base.metadata.create_all(sync_engine)",
+        "detail": "tests.conftest",
         "documentation": {}
     }
 ]
