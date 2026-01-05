@@ -248,6 +248,14 @@
         "documentation": {}
     },
     {
+        "label": "ProgrammRead",
+        "importPath": "core.schemas",
+        "description": "core.schemas",
+        "isExtraImport": true,
+        "detail": "core.schemas",
+        "documentation": {}
+    },
+    {
         "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
@@ -300,6 +308,14 @@
     },
     {
         "label": "ProgrammAdd",
+        "importPath": "src.core.schemas",
+        "description": "src.core.schemas",
+        "isExtraImport": true,
+        "detail": "src.core.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "ProgrammRead",
         "importPath": "src.core.schemas",
         "description": "src.core.schemas",
         "isExtraImport": true,
@@ -401,7 +417,7 @@
         "kind": 6,
         "importPath": "src.core.schemas",
         "description": "src.core.schemas",
-        "peekOfCode": "class ProgrammRead(BaseModel):\n    id: Optional[int]\n    title: str\n    author: str \n    description: Optional[str]\n    model_config = {\n        \"from_attributes\": True\n    }\nclass ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)",
+        "peekOfCode": "class ProgrammRead(BaseModel):\n    id: Optional[int]\n    title: str\n    author: str \n    description: Optional[str]\n    model_config = {\n        \"from_attributes\": True\n    }\n    def __eq__(self, other: object) -> bool:\n        if not isinstance(other, type(self)):",
         "detail": "src.core.schemas",
         "documentation": {}
     },
@@ -410,7 +426,7 @@
         "kind": 6,
         "importPath": "src.core.schemas",
         "description": "src.core.schemas",
-        "peekOfCode": "class ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)\n    title: str = Field(default='N/A')\n    author: str = Field(default='N/A')\n    description: Optional[str] = Field(default='N/A')\n    license_key: int = Field(ge=10, le=10)",
+        "peekOfCode": "class ProgrammAdd(BaseModel):\n    id: Optional[int] = Field(default=1)\n    title: str = Field(default='N/A')\n    author: str = Field(default='N/A')\n    description: Optional[str] = Field(default='N/A')\n    license_key: str = Field(min_length=10, max_length=10)",
         "detail": "src.core.schemas",
         "documentation": {}
     },
@@ -437,16 +453,34 @@
         "kind": 2,
         "importPath": "src.main",
         "description": "src.main",
-        "peekOfCode": "def main():\n    ProgrammsRepo.create_tables()\n    print(ProgrammService.create_programm(ProgrammAdd(\n        id=1, \n        title='Git',\n        author='Linus Torvalds', \n        description='Git is a distributed version control software system\\\nthat iscapable of managing versions of source code or data.\\\nIt is often used to control source code by programmers who are developing software collaboratively.',\n        license_key=1234567890",
+        "peekOfCode": "def main():\n    ProgrammsRepo.create_tables()\n    print(ProgrammService.create_programm(ProgrammAdd(\n        id=1, \n        title='Git',\n        author='Linus Torvalds', \n        description='Git is a distributed version control software system\\\nthat iscapable of managing versions of source code or data.\\\nIt is often used to control source code by programmers who are developing software collaboratively.',\n        license_key='11-12-12-1'",
         "detail": "src.main",
         "documentation": {}
     },
     {
-        "label": "programms",
+        "label": "TestProgramms",
+        "kind": 6,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "class TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2\n    def test_count_before_delete_programm(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "add_programms",
         "kind": 2,
         "importPath": "tests.test_count",
         "description": "tests.test_count",
-        "peekOfCode": "def programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', description='...'),\n    ]\n@pytest.fixture\ndef empty_programms():\n    ProgrammService.clear()\ndef test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0",
+        "peekOfCode": "def add_programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...', license_key='11-12-12-1'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', license_key='11-12-12-2'),\n    ]\n@pytest.fixture\ndef read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "read_programms",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def read_programms():\n    return [\n        ProgrammRead(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammRead(id=2, title='Windows', author='Bill Gates', description='N/A'),\n    ]\n@pytest.fixture\ndef empty_programms():\n    ProgrammService.clear()\n@pytest.mark.usefixtures(\"empty_programms\")\nclass TestProgramms:",
         "detail": "tests.test_count",
         "documentation": {}
     },
@@ -455,43 +489,7 @@
         "kind": 2,
         "importPath": "tests.test_count",
         "description": "tests.test_count",
-        "peekOfCode": "def empty_programms():\n    ProgrammService.clear()\ndef test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0\ndef test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_get_programms(programms, empty_programms):\n    for programm in programms:",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "test_zero_count_programms",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0\ndef test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_get_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    all_programms = ProgrammService.get_all()",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "test_count_programms",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_get_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    all_programms = ProgrammService.get_all()\n    for added_programm in all_programms:\n        assert added_programm in programms",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "test_get_programms",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def test_get_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    all_programms = ProgrammService.get_all()\n    for added_programm in all_programms:\n        assert added_programm in programms\ndef test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    ProgrammService.delete_programm(2)",
-        "detail": "tests.test_count",
-        "documentation": {}
-    },
-    {
-        "label": "test_count_before_delete_programm",
-        "kind": 2,
-        "importPath": "tests.test_count",
-        "description": "tests.test_count",
-        "peekOfCode": "def test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    ProgrammService.delete_programm(2)\n    assert ProgrammService.count() == 1",
+        "peekOfCode": "def empty_programms():\n    ProgrammService.clear()\n@pytest.mark.usefixtures(\"empty_programms\")\nclass TestProgramms:\n    def test_zero_count_programms(self):\n        assert ProgrammService.count() == 0\n    def test_count_programms(self, add_programms):\n        for programm in add_programms:\n            ProgrammService.create_programm(programm)\n        assert ProgrammService.count() == 2",
         "detail": "tests.test_count",
         "documentation": {}
     }

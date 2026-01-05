@@ -11,6 +11,14 @@ class ProgrammRead(BaseModel):
     model_config = {
         "from_attributes": True
     }
+    
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, type(self)):
+            return False
+        for attr in ["title", "author", "description"]:
+            if getattr(self, attr) != getattr(other, attr):
+                return False
+        return True
 
 
 class ProgrammAdd(BaseModel):
@@ -18,4 +26,4 @@ class ProgrammAdd(BaseModel):
     title: str = Field(default='N/A')
     author: str = Field(default='N/A')
     description: Optional[str] = Field(default='N/A')
-    license_key: int = Field(ge=10, le=10)
+    license_key: str = Field(min_length=10, max_length=10)
