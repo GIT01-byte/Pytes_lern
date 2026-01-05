@@ -1,6 +1,6 @@
 from sqlalchemy import and_, func, select, delete
 
-from core.db import Base, async_engine, async_session_factory
+from core.db import Base, sync_engine, session_factory
 
 from core.models import Programm
 from core.schemas import ProgrammRead, ProgrammAdd
@@ -8,16 +8,15 @@ from core.schemas import ProgrammRead, ProgrammAdd
 
 class ProgrammsRepo:
     @staticmethod
-    async def create_tables():
-        async with async_engine.begin() as conn:
-            await conn.run_sync(Base.metadata.drop_all)
-            await conn.run_sync(Base.metadata.create_all)
+    def create_tables():
+        Base.metadata.drop_all(sync_engine)
+        Base.metadata.create_all(sync_engine)
 
     @staticmethod
-    async def get_all_programms():
-        async with async_session_factory() as session:
+    def get_all_programms():
+        with session_factory() as session:
             query = select(Programm)
-            res = await session.execute(query)
+            res = session.execute(query)
             result_orm = res.scalars().all()
             print(f"{result_orm=}")
 
@@ -26,55 +25,55 @@ class ProgrammsRepo:
             return result_dto
 
     @staticmethod
-    async def add_programm(programm: ProgrammAdd):
-        async with async_session_factory() as session:
+    def add_programm(programm: ProgrammAdd):
+        with session_factory() as session:
             programm_to_add = programm.model_dump()
             
             new_programm = Programm(**programm_to_add)
             session.add(new_programm)
-            await session.flush()
-            await session.commit()
-            await session.refresh(new_programm)
+            session.flush()
+            session.commit()
+            session.refresh(new_programm)
             
             print(f'Add programm: {new_programm.title}, ID: {new_programm.id}')
             return new_programm.id
 
     @staticmethod
-    async def delete_programm(programm_id: int):
-        async with async_session_factory() as session:
+    def delete_programm(programm_id: int):
+        with session_factory() as session:
             # Выполнить запрос для выбора программы по id
             query = select(Programm).where(Programm.id == programm_id)
-            result = await session.execute(query)
+            result = session.execute(query)
             programm = result.scalar_one_or_none()
             
             if programm:
                 # Удалить найденную программу
-                await session.delete(programm)
-                await session.commit()  # Или flush(), если хотите отложить commit
+                session.delete(programm)
+                session.commit()  # Или flush(), если хотите отложить commit
                 print(f'Deleted programm with ID: {programm_id}')
             else:
                 print(f'No programm found with ID: {programm_id}')
 
     @staticmethod
-    async def delete_all():
-        async with async_session_factory() as session:
+    def delete_all():
+        with session_factory() as session:
             query = select(Programm)
-            res = await session.execute(query)
+            res = session.execute(query)
             items_to_delete = res.scalars().all()
             
             delete_count = 0
             for item in items_to_delete:
-                await session.delete(item)
+                session.delete(item)
                 delete_count += 1
             
             print(f'Delete all programm rows, count deleted rows: {delete_count}')
-            await session.commit()
+            session.commit()
 
     @staticmethod
-    async def count_of_programms():
-        async with async_session_factory() as session:
+    def count_of_programms():
+        with session_factory() as session:
             query = select(func.count()).select_from(Programm)
-            res = await session.execute(query)
+            res = session.execute(query)
             count = res.scalar()
             print(f'Count of all programms: {count}')
             return count

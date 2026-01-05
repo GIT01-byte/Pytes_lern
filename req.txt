@@ -7,5 +7,6 @@ pydantic-settings
 
 sqlalchemy
 psycopg
+psycopg_binary
 asyncpg
 alembic

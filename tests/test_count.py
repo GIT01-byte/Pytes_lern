@@ -2,31 +2,29 @@ import pytest
 from src.programms.service import ProgrammService
 from src.core.schemas import ProgrammAdd
 
-@pytest.fixture(scope="session") # Можно сделать session, раз данные общие
+@pytest.fixture
 def programms():
     return [
         ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...'),
         ProgrammAdd(id=2, title='Windows', author='Bill Gates', description='...'),
     ]
 
-@pytest.mark.asyncio
-async def test_zero_count_programms():
-    await ProgrammService.clear()
-    assert await ProgrammService.count() == 0
+@pytest.fixture
+def empty_programms():
+    ProgrammService.clear()
 
-@pytest.mark.asyncio
-async def test_count_programms(programms):
-    await ProgrammService.clear()
+def test_zero_count_programms(empty_programms):
+    assert ProgrammService.count() == 0
+
+def test_count_programms(programms, empty_programms):
     for programm in programms:
-        await ProgrammService.create_programm(programm)
+        ProgrammService.create_programm(programm)
 
-    assert await ProgrammService.count() == 2
+    assert ProgrammService.count() == 2
 
-@pytest.mark.asyncio
-async def test_count_before_delete_programm(programms):
-    await ProgrammService.clear()
+def test_count_before_delete_programm(programms, empty_programms):
     for programm in programms:
-        await ProgrammService.create_programm(programm)
-    await ProgrammService.delete_programm(2)
+        ProgrammService.create_programm(programm)
+    ProgrammService.delete_programm(2)
     
-    assert await ProgrammService.count() == 1
+    assert ProgrammService.count() == 1

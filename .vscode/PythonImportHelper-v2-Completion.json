@@ -160,7 +160,7 @@
         "documentation": {}
     },
     {
-        "label": "async_engine",
+        "label": "sync_engine",
         "importPath": "core.db",
         "description": "core.db",
         "isExtraImport": true,
@@ -168,7 +168,7 @@
         "documentation": {}
     },
     {
-        "label": "async_session_factory",
+        "label": "session_factory",
         "importPath": "core.db",
         "description": "core.db",
         "isExtraImport": true,
@@ -176,7 +176,7 @@
         "documentation": {}
     },
     {
-        "label": "async_engine",
+        "label": "sync_engine",
         "importPath": "core.db",
         "description": "core.db",
         "isExtraImport": true,
@@ -352,11 +352,29 @@
         "documentation": {}
     },
     {
+        "label": "sync_engine",
+        "kind": 5,
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "peekOfCode": "sync_engine = create_engine(\n    url=settings.DATABASE_URL_psycopg,\n    echo=False,\n)\nasync_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\nsession_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)",
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
         "label": "async_engine",
         "kind": 5,
         "importPath": "src.core.db",
         "description": "src.core.db",
-        "peekOfCode": "async_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\n# session_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):",
+        "peekOfCode": "async_engine = create_async_engine(\n    url=settings.DATABASE_URL_asyncpg,\n    echo=False,\n)\nsession_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):",
+        "detail": "src.core.db",
+        "documentation": {}
+    },
+    {
+        "label": "session_factory",
+        "kind": 5,
+        "importPath": "src.core.db",
+        "description": "src.core.db",
+        "peekOfCode": "session_factory = sessionmaker(sync_engine)\nasync_session_factory = async_sessionmaker(async_engine)\nclass Base(DeclarativeBase):\n    repr_cols_num = 3\n    repr_cols = tuple()\n    def __repr__(self):\n        \"\"\"Relationships не используются в repr(), т.к. могут вести к неожиданным подгрузкам\"\"\"\n        cols = []\n        for idx, col in enumerate(self.__table__.columns.keys()):\n            if col in self.repr_cols or idx < self.repr_cols_num:",
         "detail": "src.core.db",
         "documentation": {}
     },
@@ -401,7 +419,7 @@
         "kind": 6,
         "importPath": "src.programms.repository",
         "description": "src.programms.repository",
-        "peekOfCode": "class ProgrammsRepo:\n    @staticmethod\n    async def create_tables():\n        async with async_engine.begin() as conn:\n            await conn.run_sync(Base.metadata.drop_all)\n            await conn.run_sync(Base.metadata.create_all)\n    @staticmethod\n    async def get_all_programms():\n        async with async_session_factory() as session:\n            query = select(Programm)",
+        "peekOfCode": "class ProgrammsRepo:\n    @staticmethod\n    def create_tables():\n        Base.metadata.drop_all(sync_engine)\n        Base.metadata.create_all(sync_engine)\n    @staticmethod\n    def get_all_programms():\n        with session_factory() as session:\n            query = select(Programm)\n            res = session.execute(query)",
         "detail": "src.programms.repository",
         "documentation": {}
     },
@@ -410,8 +428,17 @@
         "kind": 6,
         "importPath": "src.programms.service",
         "description": "src.programms.service",
-        "peekOfCode": "class ProgrammService:\n    @classmethod\n    async def get_all(cls):\n        programms = await ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    async def count(cls):\n        count = await ProgrammsRepo.count_of_programms()\n        return count\n    @classmethod",
+        "peekOfCode": "class ProgrammService:\n    @classmethod\n    def get_all(cls):\n        programms = ProgrammsRepo.get_all_programms()\n        return programms\n    @classmethod\n    def count(cls):\n        count = ProgrammsRepo.count_of_programms()\n        return count\n    @classmethod",
         "detail": "src.programms.service",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "src.main",
+        "description": "src.main",
+        "peekOfCode": "def main():\n    ProgrammsRepo.create_tables()\n    print(ProgrammService.create_programm(ProgrammAdd(\n        id=1, \n        title='Git',\n        author='Linus Torvalds', \n        description='Git is a distributed version control software system\\\nthat iscapable of managing versions of source code or data.\\\nIt is often used to control source code by programmers who are developing software collaboratively.'\n        ))",
+        "detail": "src.main",
         "documentation": {}
     },
     {
@@ -419,7 +446,43 @@
         "kind": 2,
         "importPath": "tests.test_count",
         "description": "tests.test_count",
-        "peekOfCode": "def programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', description='...'),\n    ]\n@pytest.mark.asyncio\nasync def test_zero_count_programms():\n    await ProgrammService.clear()\n    assert await ProgrammService.count() == 0\n@pytest.mark.asyncio",
+        "peekOfCode": "def programms():\n    return [\n        ProgrammAdd(id=1, title='Git', author='Linus Torvalds', description='...'),\n        ProgrammAdd(id=2, title='Windows', author='Bill Gates', description='...'),\n    ]\n@pytest.fixture\ndef empty_programms():\n    ProgrammService.clear()\ndef test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "empty_programms",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def empty_programms():\n    ProgrammService.clear()\ndef test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0\ndef test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "test_zero_count_programms",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def test_zero_count_programms(empty_programms):\n    assert ProgrammService.count() == 0\ndef test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    ProgrammService.delete_programm(2)",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "test_count_programms",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def test_count_programms(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    assert ProgrammService.count() == 2\ndef test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    ProgrammService.delete_programm(2)\n    assert ProgrammService.count() == 1",
+        "detail": "tests.test_count",
+        "documentation": {}
+    },
+    {
+        "label": "test_count_before_delete_programm",
+        "kind": 2,
+        "importPath": "tests.test_count",
+        "description": "tests.test_count",
+        "peekOfCode": "def test_count_before_delete_programm(programms, empty_programms):\n    for programm in programms:\n        ProgrammService.create_programm(programm)\n    ProgrammService.delete_programm(2)\n    assert ProgrammService.count() == 1",
         "detail": "tests.test_count",
         "documentation": {}
     }

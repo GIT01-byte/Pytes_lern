@@ -9,10 +9,10 @@ from programms.repository import ProgrammsRepo
 tracemalloc.start()
 
 
-async def main():
-    await ProgrammsRepo.create_tables()
+def main():
+    ProgrammsRepo.create_tables()
     
-    print(await ProgrammService.create_programm(ProgrammAdd(
+    print(ProgrammService.create_programm(ProgrammAdd(
         id=1, 
         title='Git',
         author='Linus Torvalds', 
@@ -21,15 +21,15 @@ that iscapable of managing versions of source code or data.\
 It is often used to control source code by programmers who are developing software collaboratively.'
         ))
     )
-    print(await ProgrammService.create_programm(ProgrammAdd(
+    print(ProgrammService.create_programm(ProgrammAdd(
         id=2, 
         title='Git1',
         author='Linus Torvalds Second',
         ))
     )
-    print(await ProgrammService.get_all())
-    print(await ProgrammService.count())
+    print(ProgrammService.get_all())
+    print(ProgrammService.count())
 
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    main()
